@@ -2,7 +2,6 @@ package xbagon.theorigin;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.IForgeRegistryEntry.Impl;
 
 public class NameUtils {
 	

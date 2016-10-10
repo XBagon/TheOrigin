@@ -1,7 +1,6 @@
 package xbagon.theorigin.proxy;
 
 import xbagon.theorigin.ModItems;
-import xbagon.theorigin.TheOrigin;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
