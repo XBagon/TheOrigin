@@ -1,6 +1,5 @@
 package xbagon.theorigin;
 
-import xbagon.theorigin.init.ModItems;
 import xbagon.theorigin.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
