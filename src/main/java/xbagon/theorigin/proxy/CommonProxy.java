@@ -1,5 +1,11 @@
 package xbagon.theorigin.proxy;
 
-public interface CommonProxy {
-	public void init();
+import net.minecraft.item.Item;
+
+public class CommonProxy {
+	
+	public void registerModels(){
+		
+	}
+	
 }

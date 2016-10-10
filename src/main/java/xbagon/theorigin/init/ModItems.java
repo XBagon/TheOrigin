@@ -1,6 +1,6 @@
 package xbagon.theorigin.init;
 
-import xbagon.theorigin.Reference;
+import xbagon.theorigin.NameUtils;
 import xbagon.theorigin.items.ItemOriginPearl;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -11,12 +11,17 @@ public class ModItems {
 	
 	public static Item originPearl;
 	
-	public static void init() {
+	public void init() {
 		originPearl = new ItemOriginPearl();
+		NameUtils.setNames(originPearl, "originPearl");
 	}
 	
-	public static void register() {
-		GameRegistry.register(originPearl);
+	public void register() {
+		registerItem(originPearl);
+	}
+	
+	private void registerItem(Item item){
+		GameRegistry.register(item);
 	}
 	
 	public static void registerRenders() {
