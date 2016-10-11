@@ -16,14 +16,11 @@ public class TheOrigin {
 	public static final String NAME = "The Origin";
 	public static final String VERSION = "0.1";
 	public static final String ACCEPTED_VERSIONS = "[1.10.2]";
-	
-	public static final String CLIENT_PROXY_CLASS = "xbagon.theorigin.proxy.ClientProxy";
-	public static final String SERVER_PROXY_CLASS = "xbagon.theorigin.proxy.ServerProxy";
 
 	@Instance(MOD_ID)
 	public static TheOrigin instance = new TheOrigin();
 	
-	@SidedProxy(clientSide = TheOrigin.CLIENT_PROXY_CLASS, serverSide = TheOrigin.SERVER_PROXY_CLASS)
+	@SidedProxy(clientSide = "xbagon.theorigin.proxy.ClientProxy", serverSide = "xbagon.theorigin.proxy.CommonProxy")
 	public static CommonProxy proxy = new CommonProxy();
 	
 	public ModItems items;
