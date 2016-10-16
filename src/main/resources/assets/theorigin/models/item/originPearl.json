@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "theorigin:items/originPearl"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "theorigin:items/originPearl"
+  }
 }
