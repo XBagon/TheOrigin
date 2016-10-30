@@ -1,6 +1,6 @@
 package xbagon.theorigin.items;
 
-import entity.EntityOriginPearl;
+import xbagon.theorigin.entity.EntityOriginPearl;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

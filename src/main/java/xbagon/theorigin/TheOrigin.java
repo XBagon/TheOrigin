@@ -40,6 +40,7 @@ public class TheOrigin {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
+
         proxy.registerModels();
         proxy.registerEntities();
         GameRegistry.registerWorldGenerator(new WorldGen(), 0);

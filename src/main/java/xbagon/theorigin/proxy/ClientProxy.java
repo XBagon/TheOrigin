@@ -1,6 +1,8 @@
 package xbagon.theorigin.proxy;
 
-import entity.EntityOriginPearl;
+import net.minecraft.client.renderer.entity.RenderEnderman;
+import xbagon.theorigin.entity.EntityOriginMan;
+import xbagon.theorigin.entity.EntityOriginPearl;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
@@ -30,7 +32,8 @@ public class ClientProxy extends CommonProxy {
     public void registerEntities() {
         rm = Minecraft.getMinecraft().getRenderManager();
         ri = Minecraft.getMinecraft().getRenderItem();
-        registerEntity(EntityOriginPearl.class, "ThrownOriginalpearl", new RenderSnowball(rm, ModItems.originPearl, ri));
+        registerEntity(EntityOriginPearl.class, "ThrownOriginpearl", new RenderSnowball(rm, ModItems.originPearl, ri));
+        registerMob(EntityOriginMan.class, "Originman", new RenderEnderman(rm), 201, 94);
     }
 
     //----------------------------------------------------------------------------------------------------------------
@@ -50,6 +53,11 @@ public class ClientProxy extends CommonProxy {
 
     public void registerEntity(Class entityClass, String name, Render render) {
         EntityRegistry.registerModEntity(entityClass, name, ++modEntityID, TheOrigin.instance, 64, 10, true);
+        rm.entityRenderMap.put(entityClass, render);
+    }
+
+    public void registerMob(Class entityClass, String name, Render render, int primaryColor, int secondaryColor) {
+        EntityRegistry.registerModEntity(entityClass, name, ++modEntityID, TheOrigin.instance, 64, 10, true, primaryColor, secondaryColor);
         rm.entityRenderMap.put(entityClass, render);
     }
 

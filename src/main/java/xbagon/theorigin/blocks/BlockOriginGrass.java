@@ -6,11 +6,19 @@ import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.EntityInteract;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import xbagon.theorigin.ModBlocks;
+import xbagon.theorigin.entity.EntityOriginMan;
 
 import java.util.Random;
+
 
 public class BlockOriginGrass extends Block {
 
@@ -24,13 +32,27 @@ public class BlockOriginGrass extends Block {
     }
 
 
-    //@SubscribeEvent
-    //public void onEntity(EntityInteract event){
-    //    if(event.getTarget() instanceof EntityEnderman && event.getItemStack().getItem() == this.){
-    //        ((EntityEnderman)event.getTarget()).setHeldBlockState(this.getDefaultState());
-    //    }
-    //}
-
+    @SubscribeEvent
+   public void onEntity(EntityInteract event){
+                    if (!event.getWorld().isRemote)
+                    {
+                        ItemStack stack = event.getEntityPlayer().getHeldItemMainhand();
+                        if(stack != null) {
+                            if(stack.getItem() instanceof ItemBlock) {
+                                if (event.getTarget() instanceof EntityEnderman && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockOriginGrass && ((EntityEnderman) event.getTarget()).getHeldBlockState() != ModBlocks.originGrass.getDefaultState()) {
+                                    stack.stackSize--;
+                                    EntityEnderman eman = ((EntityEnderman) event.getTarget());
+                                    eman.setDead();
+                                    EntityOriginMan oman = new EntityOriginMan(event.getWorld());
+                                    oman.setPosition(eman.posX,eman.posY,eman.posZ);
+                                    oman.setFire(1000);
+                                    oman.setGlowing(true);
+                                    event.getWorld().spawnEntityInWorld(oman);
+                }
+            }
+        }
+        }
+    }
 
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
