@@ -18,4 +18,12 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(new BlockOriginGrass());
     }
 
+    public void registerLootTables(){
+
+    }
+
+    public void registerRecipes(){
+
+    }
+
 }

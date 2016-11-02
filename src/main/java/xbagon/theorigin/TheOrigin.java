@@ -43,6 +43,8 @@ public class TheOrigin {
 
         proxy.registerModels();
         proxy.registerEntities();
+        proxy.registerLootTables();
+        proxy.registerRecipes();
         GameRegistry.registerWorldGenerator(new WorldGen(), 0);
     }
 

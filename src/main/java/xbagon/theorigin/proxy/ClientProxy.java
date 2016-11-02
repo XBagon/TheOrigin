@@ -1,20 +1,23 @@
 package xbagon.theorigin.proxy;
 
-import net.minecraft.client.renderer.entity.RenderEnderman;
-import xbagon.theorigin.entity.EntityOriginMan;
-import xbagon.theorigin.entity.EntityOriginPearl;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderEnderman;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import xbagon.theorigin.ModBlocks;
 import xbagon.theorigin.ModItems;
 import xbagon.theorigin.TheOrigin;
+import xbagon.theorigin.entity.EntityOriginMan;
+import xbagon.theorigin.entity.EntityOriginPearl;
 
 public class ClientProxy extends CommonProxy {
 
@@ -27,13 +30,15 @@ public class ClientProxy extends CommonProxy {
     public void registerModels() {
         registerModel(ModItems.originPearl, 0, new ModelResourceLocation(ModItems.originPearl.getRegistryName(), "inventory"));
         registerModel(ModBlocks.originGrass, 0, new ModelResourceLocation(ModBlocks.originGrass.getRegistryName(), "inventory"));
+        registerModel(ModBlocks.originStone, 0, new ModelResourceLocation(ModBlocks.originStone.getRegistryName(), "inventory"));
+        registerModel(ModBlocks.originCatalyst, 0, new ModelResourceLocation(ModBlocks.originCatalyst.getRegistryName(), "inventory"));
     }
 
     public void registerEntities() {
         rm = Minecraft.getMinecraft().getRenderManager();
         ri = Minecraft.getMinecraft().getRenderItem();
         registerEntity(EntityOriginPearl.class, "ThrownOriginpearl", new RenderSnowball(rm, ModItems.originPearl, ri));
-        registerMob(EntityOriginMan.class, "Originman", new RenderEnderman(rm), 201, 94);
+        registerEntity(EntityOriginMan.class, "Originman", new RenderEnderman(rm));
     }
 
     //----------------------------------------------------------------------------------------------------------------
@@ -56,9 +61,24 @@ public class ClientProxy extends CommonProxy {
         rm.entityRenderMap.put(entityClass, render);
     }
 
-    public void registerMob(Class entityClass, String name, Render render, int primaryColor, int secondaryColor) {
+    public void registerEntity(Class entityClass, String name, Render render, int primaryColor, int secondaryColor) {
         EntityRegistry.registerModEntity(entityClass, name, ++modEntityID, TheOrigin.instance, 64, 10, true, primaryColor, secondaryColor);
         rm.entityRenderMap.put(entityClass, render);
+    }
+
+    public void registerLootTables(){
+        LootTableList.register(EntityOriginMan.LOOT);
+    }
+
+    public void registerRecipes(){
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.originCatalyst),
+        "AAA",
+        "ABA",
+        "AAA",
+        'A', ModBlocks.originStone,
+        'B', ModItems.originPearl
+        );
+        GameRegistry.addSmelting(ModBlocks.originGrass,new ItemStack(ModBlocks.originStone),1);
     }
 
 }

@@ -23,7 +23,7 @@ import java.util.Random;
 public class BlockOriginGrass extends Block {
 
     public BlockOriginGrass() {
-        super(Material.GROUND, MapColor.LIME);
+        super(Material.GROUND, MapColor.GRASS);
         setHardness(1.5F);
         setHarvestLevel("shovel", 1);
         setSoundType(SoundType.PLANT);
@@ -36,15 +36,17 @@ public class BlockOriginGrass extends Block {
    public void onEntity(EntityInteract event){
                     if (!event.getWorld().isRemote)
                     {
-                        ItemStack stack = event.getEntityPlayer().getHeldItemMainhand();
+                        ItemStack stack = event.getEntityPlayer().getHeldItem(event.getHand());
                         if(stack != null) {
                             if(stack.getItem() instanceof ItemBlock) {
                                 if (event.getTarget() instanceof EntityEnderman && ((ItemBlock) stack.getItem()).getBlock() instanceof BlockOriginGrass && ((EntityEnderman) event.getTarget()).getHeldBlockState() != ModBlocks.originGrass.getDefaultState()) {
                                     stack.stackSize--;
                                     EntityEnderman eman = ((EntityEnderman) event.getTarget());
                                     eman.setDead();
+                                    eman.setHeldBlockState(ModBlocks.originGrass.getDefaultState());
                                     EntityOriginMan oman = new EntityOriginMan(event.getWorld());
                                     oman.setPosition(eman.posX,eman.posY,eman.posZ);
+                                    oman.setHeldBlockState(ModBlocks.originGrass.getDefaultState());
                                     oman.setFire(1000);
                                     oman.setGlowing(true);
                                     event.getWorld().spawnEntityInWorld(oman);
