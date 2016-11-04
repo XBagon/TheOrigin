@@ -7,7 +7,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import xbagon.theorigin.commands.TeleportCommand;
 import xbagon.theorigin.proxy.CommonProxy;
 import xbagon.theorigin.worldgen.WorldGen;
 
@@ -35,6 +37,7 @@ public class TheOrigin {
         blocks = new ModBlocks();
         blocks.init();
         blocks.register();
+        ModDimensions.init();
         System.out.println("Preinitialization completed.");
     }
 
@@ -51,5 +54,10 @@ public class TheOrigin {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.registerHandlers();
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event){
+        event.registerServerCommand(new TeleportCommand());
     }
 }
